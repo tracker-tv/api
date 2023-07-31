@@ -1,0 +1,44 @@
+services:
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    depends_on:
+      db-migration:
+        condition: service_completed_successfully
+
+  database:
+    image: postgres:15.3
+    environment:
+      POSTGRES_USER: "test-user"
+      POSTGRES_PASSWORD: "test-password"
+      POSTGRES_DB: "tv-tracker"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      start_period: 5s
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - data:/var/lib/postgresql/data
+
+  db-migration:
+    build:
+      context: .
+      dockerfile: Dockerfile.db-migration
+    depends_on:
+      database:
+        condition: service_healthy
+    command:
+      - update
+    environment:
+      LIQUIBASE_LOG_LEVEL: "FINE"
+      LIQUIBASE_COMMAND_CHANGELOG_FILE: "index.xml"
+      LIQUIBASE_COMMAND_URL: "jdbc:postgresql://database:5432/tv-tracker"
+      LIQUIBASE_COMMAND_USERNAME: "test-user"
+      LIQUIBASE_COMMAND_PASSWORD: "test-password"
+      LIQUIBASE_DATABASE_CHANGELOG_TABLE_NAME: "tv_tracker_migrations"
+      LIQUIBASE_DATABASE_CHANGELOG_LOCK_TABLE_NAME: "tv_tracker_migrations_lock"
+
+volumes:
+  data:

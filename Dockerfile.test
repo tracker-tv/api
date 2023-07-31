@@ -1,0 +1,6 @@
+FROM gradle:8.4.0-jdk17
+
+COPY . /opt/app/sources
+WORKDIR /opt/app/sources
+
+CMD ["gradle", "test"]

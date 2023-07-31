@@ -1,0 +1,7 @@
+FROM liquibase/liquibase:4.23.0
+
+LABEL org.opencontainers.image.source=https://github.com/tracker-tv/api
+LABEL org.opencontainers.image.description="TV Tracker database migration"
+LABEL org.opencontainers.image.licenses=MIT
+
+COPY db/changelog/ /liquibase/changelog/

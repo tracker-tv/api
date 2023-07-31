@@ -1,0 +1,82 @@
+openapi: 3.0.3
+info:
+  title: TV Tracker
+  description: API for TV Tracker app
+  version: 1.0.0
+paths:
+  /v1/actors:
+    post:
+      summary: Create a new actor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateActorRequest"
+      responses:
+        201:
+          description: Actor created
+        422:
+          $ref: '#/components/responses/ValidationConstraintResponse'
+  /v1/actors/{id}:
+    get:
+      summary: Return an Actor
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          $ref: '#/components/responses/ActorResponse'
+components:
+  responses:
+    ActorResponse:
+      description: Detail of an actor
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Actor'
+    ValidationConstraintResponse:
+      description: Validation constraint
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 422
+              timestamp:
+                type: string
+                format: timestamp
+                example: "2023-08-28T06:57:33.911610274Z"
+              message:
+                type: string
+                example: "Validation constraint error"
+              violations:
+                type: object
+                example: '{"name": ["must not be blank"]}'
+  schemas:
+    Actor:
+      description: Actor
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+          example: 'Bryan Cranston'
+          nullable: false
+    CreateActorRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          nullable: false
+          minLength: 1
+          example: "Bryan Cranston"

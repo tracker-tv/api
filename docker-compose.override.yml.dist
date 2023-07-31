@@ -1,0 +1,8 @@
+services:
+  test:
+    volumes:
+     - "$HOME/.gradle-dc:/home/gradle/.gradle"
+
+  database:
+    ports:
+      - "5432:5432"
