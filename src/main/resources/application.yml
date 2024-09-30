@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/test"
+    username: "test-user"
+    password: "test-password"
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    change-log: classpath:/db/changelog/master.yml
+    database-change-log-table: migrations
+    database-change-log-lock-table: migrations_lock
+
