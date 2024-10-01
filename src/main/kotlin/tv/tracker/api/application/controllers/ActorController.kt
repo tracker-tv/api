@@ -11,5 +11,5 @@ class ActorController(
     private val actorRepository: ActorRepository,
 ) {
     @GetMapping("/actors", produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun getActors(): List<ActorView> = actorRepository.findAll().map { ActorView.from(it) }
+    fun actorList(): List<ActorView> = actorRepository.findAll().map { ActorView.from(it) }
 }

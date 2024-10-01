@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Bryan Cranston",
+    "birthday": "1956-03-07",
+    "deathday": null,
+    "description": null
+  },
+  {
+    "id": 2,
+    "name": "Aaron Paul",
+    "birthday": "1979-08-27",
+    "deathday": null,
+    "description": null
+  },
+  {
+    "id": 3,
+    "name": "Bob Odenkirk",
+    "birthday": "1962-10-22",
+    "deathday": null,
+    "description": null
+  }
+]
