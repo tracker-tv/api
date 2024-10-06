@@ -17,6 +17,10 @@ updates:
           - "jvm"
           - "plugin.spring"
           - "plugin.serialization"
+      exposed:
+        patterns:
+          - "org.jetbrains.exposed:exposed-spring-boot-starter"
+          - "org.jetbrains.exposed:exposed-kotlin-datetime"
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
