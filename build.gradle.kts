@@ -44,7 +44,7 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 
     // Kotlin
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.1")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
